@@ -51,9 +51,9 @@ export default function SystemLogs() {
       <div ref={listRef} style={{ display: "flex", flexDirection: "column", gap: 0, overflowY: "hidden" }}>
         {logs.map(l => (
           <div key={l.id} className="log-row">
-            <span className="log-time">{l.time}</span>
-            <span className="log-level">{l.level}</span>
-            <span className="log-msg">{l.msg}</span>
+            <span className="log-time" style={{ color: "#5a7a9a" }}>{l.time}</span>
+            <span className="log-level" style={{ color: "var(--gold)" }}>{l.level}</span>
+            <span className="log-msg" style={{ color: "#8aa8c8" }}>{l.msg}</span>
           </div>
         ))}
       </div>

@@ -22,7 +22,7 @@ function RadarCanvas() {
       dist: 0.25 + Math.random() * 0.68,
       alpha: 0,
       size: 1.5 + Math.random() * 3.5,
-      color: Math.random() > 0.8 ? "#ff4040" : "#00ff41",
+      color: Math.random() > 0.8 ? "#ff4040" : "#d4a020",
     }));
 
     let rafId: number;
@@ -35,16 +35,16 @@ function RadarCanvas() {
         const r = (maxR / 4) * i;
         ctx.beginPath();
         ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.strokeStyle = i === 4 ? "rgba(0,255,65,0.2)" : "rgba(0,255,65,0.1)";
+        ctx.strokeStyle = i === 4 ? "rgba(212,160,32,0.2)" : "rgba(212,160,32,0.1)";
         ctx.lineWidth = i === 4 ? 1.5 : 1;
         ctx.stroke();
-        ctx.fillStyle = "rgba(0,255,65,0.3)";
+        ctx.fillStyle = "rgba(212,160,32,0.3)";
         ctx.font = "8px 'Courier New'";
         ctx.fillText(labels[i - 1], cx + r + 3, cy - 3);
       }
 
       // Crosshairs + diagonals
-      ctx.strokeStyle = "rgba(0,255,65,0.08)";
+      ctx.strokeStyle = "rgba(212,160,32,0.08)";
       ctx.lineWidth = 0.5;
       [0, 45, 90, 135].forEach(deg => {
         const rad = (deg * Math.PI) / 180;
@@ -57,7 +57,7 @@ function RadarCanvas() {
       // Compass labels
       const compass = [["N", 0, -1], ["E", 1, 0], ["S", 0, 1], ["W", -1, 0]];
       compass.forEach(([lbl, dx, dy]) => {
-        ctx.fillStyle = "rgba(0,255,65,0.4)";
+        ctx.fillStyle = "rgba(212,160,32,0.4)";
         ctx.font = "9px 'Courier New'";
         ctx.fillText(String(lbl), cx + Number(dx) * (maxR + 16) - 4, cy + Number(dy) * (maxR + 16) + 3);
       });
@@ -71,7 +71,7 @@ function RadarCanvas() {
         ctx.moveTo(cx, cy);
         ctx.arc(cx, cy, maxR, a, a + 0.035);
         ctx.closePath();
-        ctx.fillStyle = `rgba(0,255,65,${alpha})`;
+        ctx.fillStyle = `rgba(212,160,32,${alpha})`;
         ctx.fill();
       }
 
@@ -79,9 +79,9 @@ function RadarCanvas() {
       ctx.beginPath();
       ctx.moveTo(cx, cy);
       ctx.lineTo(cx + Math.cos(sweepAngle) * maxR, cy + Math.sin(sweepAngle) * maxR);
-      ctx.strokeStyle = "rgba(0,255,65,0.95)";
+      ctx.strokeStyle = "rgba(212,160,32,0.95)";
       ctx.lineWidth = 1.5;
-      ctx.shadowColor = "#00ff41";
+      ctx.shadowColor = "#d4a020";
       ctx.shadowBlur = 8;
       ctx.stroke();
       ctx.shadowBlur = 0;
@@ -98,7 +98,7 @@ function RadarCanvas() {
           ctx.arc(bx, by, b.size, 0, Math.PI * 2);
           ctx.fillStyle = b.color === "#ff4040"
             ? `rgba(255,64,64,${b.alpha * 0.8})`
-            : `rgba(0,255,65,${b.alpha})`;
+            : `rgba(212,160,32,${b.alpha})`;
           ctx.shadowColor = b.color;
           ctx.shadowBlur = 10;
           ctx.fill();
@@ -109,14 +109,14 @@ function RadarCanvas() {
       // Center
       ctx.beginPath();
       ctx.arc(cx, cy, 3, 0, Math.PI * 2);
-      ctx.fillStyle = "#00ff41";
-      ctx.shadowColor = "#00ff41";
+      ctx.fillStyle = "#d4a020";
+      ctx.shadowColor = "#d4a020";
       ctx.shadowBlur = 12;
       ctx.fill();
       ctx.shadowBlur = 0;
 
       // Coord overlay
-      ctx.fillStyle = "rgba(0,255,65,0.4)";
+      ctx.fillStyle = "rgba(212,160,32,0.4)";
       ctx.font = "7px 'Courier New'";
       ctx.fillText(`LAT: 50.4501°N`, 6, H - 22);
       ctx.fillText(`LON: 30.5234°E`, 6, H - 12);
@@ -169,7 +169,7 @@ function UkraineMap() {
 
       // Grid
       for (let x = 0; x <= W; x += 32) {
-        ctx.strokeStyle = "rgba(0,255,65,0.05)";
+        ctx.strokeStyle = "rgba(212,160,32,0.05)";
         ctx.lineWidth = 1;
         ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
       }
@@ -180,26 +180,28 @@ function UkraineMap() {
       // Europe fill
       ctx.beginPath();
       europe.forEach(([px, py], i) => {
-        i === 0 ? ctx.moveTo(px * W, py * H) : ctx.lineTo(px * W, py * H);
+        if (i === 0) ctx.moveTo(px * W, py * H);
+        else ctx.lineTo(px * W, py * H);
       });
       ctx.closePath();
-      ctx.fillStyle = "rgba(0,255,65,0.04)";
+      ctx.fillStyle = "rgba(212,160,32,0.04)";
       ctx.fill();
-      ctx.strokeStyle = "rgba(0,255,65,0.2)";
+      ctx.strokeStyle = "rgba(212,160,32,0.2)";
       ctx.lineWidth = 1;
       ctx.stroke();
 
       // Ukraine highlight
       ctx.beginPath();
       ukraine.forEach(([px, py], i) => {
-        i === 0 ? ctx.moveTo(px * W, py * H) : ctx.lineTo(px * W, py * H);
+        if (i === 0) ctx.moveTo(px * W, py * H);
+        else ctx.lineTo(px * W, py * H);
       });
       ctx.closePath();
-      ctx.fillStyle = "rgba(0,255,65,0.14)";
+      ctx.fillStyle = "rgba(212,160,32,0.14)";
       ctx.fill();
-      ctx.strokeStyle = "rgba(0,255,65,0.6)";
+      ctx.strokeStyle = "rgba(212,160,32,0.6)";
       ctx.lineWidth = 1.5;
-      ctx.shadowColor = "#00ff41";
+      ctx.shadowColor = "#d4a020";
       ctx.shadowBlur = 4;
       ctx.stroke();
       ctx.shadowBlur = 0;
@@ -211,7 +213,7 @@ function UkraineMap() {
         ctx.setLineDash([3, 5]);
         ctx.moveTo(ox, oy);
         ctx.lineTo(kyivX, kyivY);
-        ctx.strokeStyle = "rgba(0,255,65,0.15)";
+        ctx.strokeStyle = "rgba(212,160,32,0.15)";
         ctx.lineWidth = 0.8;
         ctx.stroke();
         ctx.setLineDash([]);
@@ -223,9 +225,9 @@ function UkraineMap() {
         const alpha = 1 - radius / 58;
         ctx.beginPath();
         ctx.arc(kyivX, kyivY, radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(0,255,65,${alpha * 0.9})`;
+        ctx.strokeStyle = `rgba(212,160,32,${alpha * 0.9})`;
         ctx.lineWidth = 1.5;
-        ctx.shadowColor = "#00ff41";
+        ctx.shadowColor = "#d4a020";
         ctx.shadowBlur = 6;
         ctx.stroke();
         ctx.shadowBlur = 0;
@@ -234,28 +236,28 @@ function UkraineMap() {
       // Kyiv dot
       ctx.beginPath();
       ctx.arc(kyivX, kyivY, 4.5, 0, Math.PI * 2);
-      ctx.fillStyle = "#00ff41";
-      ctx.shadowColor = "#00ff41";
+      ctx.fillStyle = "#d4a020";
+      ctx.shadowColor = "#d4a020";
       ctx.shadowBlur = 14;
       ctx.fill();
       ctx.shadowBlur = 0;
 
       // Crosshair at Kyiv
-      ctx.strokeStyle = "rgba(0,255,65,0.5)";
+      ctx.strokeStyle = "rgba(212,160,32,0.5)";
       ctx.lineWidth = 0.5;
       ctx.beginPath(); ctx.moveTo(kyivX - 16, kyivY); ctx.lineTo(kyivX + 16, kyivY); ctx.stroke();
       ctx.beginPath(); ctx.moveTo(kyivX, kyivY - 16); ctx.lineTo(kyivX, kyivY + 16); ctx.stroke();
 
       // Label
-      ctx.fillStyle = "#00ff41";
+      ctx.fillStyle = "#d4a020";
       ctx.font = "bold 9px 'Courier New'";
       ctx.fillText("KYIV", kyivX + 8, kyivY - 8);
-      ctx.fillStyle = "rgba(0,255,65,0.5)";
+      ctx.fillStyle = "rgba(212,160,32,0.5)";
       ctx.font = "7px 'Courier New'";
       ctx.fillText("50.45°N 30.52°E", kyivX + 8, kyivY + 2);
 
       // Lat/lon grid labels
-      ctx.fillStyle = "rgba(0,255,65,0.3)";
+      ctx.fillStyle = "rgba(212,160,32,0.3)";
       ctx.font = "7px 'Courier New'";
       ctx.fillText("45°N", 4, H * 0.55);
       ctx.fillText("50°N", 4, H * 0.38);
@@ -281,7 +283,7 @@ function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
   const style: React.CSSProperties = {
     position: "absolute",
     width: s, height: s,
-    borderColor: "rgba(0,255,65,0.35)",
+    borderColor: "rgba(212,160,32,0.35)",
     borderStyle: "solid",
     ...(pos === "tl" ? { top: 0, left: 0, borderWidth: "1px 0 0 1px" } :
         pos === "tr" ? { top: 0, right: 0, borderWidth: "1px 1px 0 0" } :
@@ -292,13 +294,13 @@ function Corner({ pos }: { pos: "tl" | "tr" | "bl" | "br" }) {
 }
 
 // ─── Live metric block ────────────────────────────────────────────────────────
-function MetricBox({ label, value, unit, color = "#00ff41" }: {
+function MetricBox({ label, value, unit, color = "#d4a020" }: {
   label: string; value: string; unit?: string; color?: string;
 }) {
   return (
     <div style={{
       padding: "10px 14px",
-      border: "1px solid rgba(0,255,65,0.12)",
+      border: "1px solid rgba(212,160,32,0.12)",
       background: "rgba(0,10,4,0.6)",
       position: "relative",
     }}>
@@ -338,7 +340,7 @@ const FACT_CARDS = [
     title: "127-Qubit Eagle Processor",
     body: "IBM Eagle R3 operates at 15 millikelvin — 180× colder than outer space. Transmon qubits achieve coherence times exceeding 300 µs in the latest generation, enabling deep quantum circuits previously impossible.",
     stat: "COHERENCE: 300 µs",
-    color: "#00ff41",
+    color: "#d4a020",
   },
   {
     tag: "CRYPTOGRAPHY",
@@ -349,10 +351,10 @@ const FACT_CARDS = [
   },
   {
     tag: "ALGORITHM",
-    title: "Grover's Search Algorithm",
-    body: "Classically searching N unsorted items takes O(N) operations. Grover's quantum algorithm achieves O(√N) — a quadratic speedup. For 3,294 asset repositories this means 57× fewer computational steps than any classical approach.",
+    title: "Grover&apos;s Search Algorithm",
+    body: "Classically searching N unsorted items takes O(N) operations. Grover&apos;s quantum algorithm achieves O(√N) — a quadratic speedup. For 3,294 asset repositories this means 57× fewer computational steps than any classical approach.",
     stat: "SPEEDUP: O(√N) vs O(N)",
-    color: "#00ff41",
+    color: "#d4a020",
   },
   {
     tag: "PERFORMANCE",
@@ -364,7 +366,7 @@ const FACT_CARDS = [
   {
     tag: "THREAT INTELLIGENCE",
     title: "Post-Quantum Cryptography",
-    body: "Shor's algorithm can break RSA-2048 in hours on a 4,000-logical-qubit machine. NIST finalized CRYSTALS-Kyber and CRYSTALS-Dilithium as post-quantum standards in 2024. Your asset analysis uses PQC-hardened encryption.",
+    body: "Shor&apos;s algorithm can break RSA-2048 in hours on a 4,000-logical-qubit machine. NIST finalized CRYSTALS-Kyber and CRYSTALS-Dilithium as post-quantum standards in 2024. Your asset analysis uses PQC-hardened encryption.",
     stat: "STANDARD: NIST FIPS 203 / 204",
     color: "#ff4040",
   },
@@ -380,7 +382,7 @@ const FACT_CARDS = [
     title: "EU Quantum Internet Alliance",
     body: "The Kyiv node is registered as EU-QNet Node #7 within the European Quantum Communication Infrastructure (EuroQCI). This provides direct encrypted quantum channels to 23 partner facilities across Eastern and Central Europe.",
     stat: "NODE: EU-QNET #7 · 23 PARTNERS",
-    color: "#00ff41",
+    color: "#d4a020",
   },
   {
     tag: "FINANCE",
@@ -407,16 +409,18 @@ const FACILITY_ROWS = [
 export default function ScanPage() {
   const router = useRouter();
   const [phase, setPhase] = useState<Phase>("scanning");
-  const [name, setName] = useState("");
+  const [name] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("qc-name") || "USER";
+    }
+    return "USER";
+  });
   const [timer, setTimer] = useState(0);
   const [steps, setSteps] = useState<typeof SCAN_STEPS>([]);
   const [nodesConn, setNodesConn] = useState(0);
   const [signalStr, setSignalStr] = useState(0);
   const [dataScanned, setDataScanned] = useState(0);
-
-  useEffect(() => {
-    setName(sessionStorage.getItem("qc-name") || "USER");
-  }, []);
+  const [sessionKey] = useState(() => Math.floor(Math.random() * 9999).toString().padStart(4, "0"));
 
   // Scanning phase
   useEffect(() => {
@@ -474,7 +478,7 @@ export default function ScanPage() {
           CLASSIFIED · ASSET ANALYSIS SESSION
         </div>
         <div style={{ fontSize: 9, color: "var(--green)", letterSpacing: "0.1em",
-          padding: "3px 8px", border: "1px solid rgba(0,255,65,0.2)", background: "rgba(0,255,65,0.04)" }}>
+          padding: "3px 8px", border: "1px solid rgba(212,160,32,0.2)", background: "rgba(212,160,32,0.04)" }}>
           OPERATOR: {name.toUpperCase()}
         </div>
         <div style={{ marginLeft: "auto", display: "flex", gap: 20, alignItems: "center" }}>
@@ -530,7 +534,7 @@ export default function ScanPage() {
                   ...(p === "tl" ? { top: 8, left: 8 } : p === "tr" ? { top: 8, right: 8 } :
                       p === "bl" ? { bottom: 8, left: 8 } : { bottom: 8, right: 8 }),
                   width: 14, height: 14,
-                  borderColor: "rgba(0,255,65,0.4)", borderStyle: "solid",
+                  borderColor: "rgba(212,160,32,0.4)", borderStyle: "solid",
                   ...(p === "tl" ? { borderWidth: "1px 0 0 1px" } :
                       p === "tr" ? { borderWidth: "1px 1px 0 0" } :
                       p === "bl" ? { borderWidth: "0 0 1px 1px" } :
@@ -546,7 +550,7 @@ export default function ScanPage() {
                 <span>SCAN PROGRESS</span>
                 <span style={{ color: "var(--green)" }}>{completePct}%</span>
               </div>
-              <div style={{ height: 3, background: "rgba(0,255,65,0.1)", position: "relative" }}>
+              <div style={{ height: 3, background: "rgba(212,160,32,0.1)", position: "relative" }}>
                 <div style={{
                   position: "absolute", left: 0, top: 0, bottom: 0,
                   width: `${completePct}%`,
@@ -589,10 +593,10 @@ export default function ScanPage() {
                   return (
                     <div key={i} style={{
                       padding: "7px 10px",
-                      borderLeft: `2px solid ${isLast ? "var(--green)" : "rgba(0,255,65,0.15)"}`,
+                      borderLeft: `2px solid ${isLast ? "var(--green)" : "rgba(212,160,32,0.15)"}`,
                       marginBottom: 4,
                       animation: "fade-in-up 0.25s ease both",
-                      background: isLast ? "rgba(0,255,65,0.03)" : "transparent",
+                      background: isLast ? "rgba(212,160,32,0.03)" : "transparent",
                     }}>
                       <div style={{
                         fontSize: 10, letterSpacing: "0.05em",
@@ -619,13 +623,13 @@ export default function ScanPage() {
             {/* Encryption info */}
             <div style={{
               padding: "10px 12px",
-              border: "1px solid rgba(0,255,65,0.1)",
+              border: "1px solid rgba(212,160,32,0.1)",
               background: "rgba(0,8,3,0.6)",
               fontSize: 8, color: "var(--text-dim)", letterSpacing: "0.08em", lineHeight: 1.8,
             }}>
               ENCRYPTION: QKD-256 · PROTOCOL: E91<br />
               AUTHORITY: QNA-EU CERT #2025-0471<br />
-              SESSION KEY: {name.substring(0,2).toUpperCase()}**-****-****-{Math.floor(Math.random()*9999).toString().padStart(4,"0")}
+              SESSION KEY: {name.substring(0,2).toUpperCase()}**-****-****-{sessionKey}
             </div>
           </div>
         </div>
@@ -673,7 +677,7 @@ export default function ScanPage() {
                 display: "flex", justifyContent: "space-between", alignItems: "flex-start",
                 fontSize: 10, letterSpacing: "0.04em",
                 padding: "8px 0",
-                borderBottom: "1px solid rgba(0,255,65,0.07)",
+                borderBottom: "1px solid rgba(212,160,32,0.07)",
                 gap: 12,
               }}>
                 <span style={{ color: "var(--text-dim)", flexShrink: 0 }}>{k}</span>
@@ -728,7 +732,7 @@ export default function ScanPage() {
             {/* Coordinate bar */}
             <div style={{
               width: "100%", padding: "8px 16px",
-              border: "1px solid rgba(0,255,65,0.1)",
+              border: "1px solid rgba(212,160,32,0.1)",
               background: "rgba(0,8,3,0.7)",
               display: "flex", justifyContent: "space-between",
               fontSize: 9, color: "var(--text-dim)", letterSpacing: "0.1em",
@@ -751,16 +755,16 @@ export default function ScanPage() {
               ▸ FACILITY READOUTS
             </div>
 
-            <MetricBox label="QUBITS AVAILABLE" value="127" color="#00ff41" />
+            <MetricBox label="QUBITS AVAILABLE" value="127" color="#d4a020" />
             <MetricBox label="QUANTUM VOLUME" value="128" color="#d4a020" />
             <MetricBox label="COHERENCE TIME" value="300" unit="µs" color="#00d4ff" />
-            <MetricBox label="GATE FIDELITY" value="99.97" unit="%" color="#00ff41" />
+            <MetricBox label="GATE FIDELITY" value="99.97" unit="%" color="#d4a020" />
             <MetricBox label="BASE TEMP" value="15" unit="mK" color="#4080ff" />
-            <MetricBox label="UPTIME (30D)" value="99.8" unit="%" color="#00ff41" />
+            <MetricBox label="UPTIME (30D)" value="99.8" unit="%" color="#d4a020" />
 
             <div style={{
               padding: "12px",
-              border: "1px solid rgba(0,255,65,0.1)",
+              border: "1px solid rgba(212,160,32,0.1)",
               background: "rgba(0,8,3,0.6)",
               fontSize: 9, color: "var(--text-dim)", letterSpacing: "0.07em", lineHeight: 1.9,
             }}>
@@ -839,10 +843,10 @@ export default function ScanPage() {
             gap: 12, marginBottom: 32,
           }}>
             {[
-              ["FACILITY", "KYIV, UA", "#00ff41"],
+              ["FACILITY", "KYIV, UA", "#d4a020"],
               ["QUBITS", "127", "#00d4ff"],
               ["QUANTUM VOL.", "128", "#d4a020"],
-              ["COHERENCE", "300 µs", "#00ff41"],
+              ["COHERENCE", "300 µs", "#d4a020"],
               ["FIDELITY", "99.97%", "#b060ff"],
             ].map(([lbl, val, col]) => (
               <div key={lbl} style={{
@@ -910,7 +914,7 @@ export default function ScanPage() {
             {/* Ukraine advantage */}
             <div style={{
               padding: "22px 24px",
-              border: "1px solid rgba(0,255,65,0.2)",
+              border: "1px solid rgba(212,160,32,0.2)",
               background: "rgba(0,15,6,0.7)",
               position: "relative",
               animation: "fade-in-up 0.4s ease 0.56s both",
@@ -923,7 +927,7 @@ export default function ScanPage() {
               </div>
               <p style={{ fontSize: 10, color: "var(--text-mid)", lineHeight: 1.7,
                 margin: "0 0 12px", letterSpacing: "0.02em" }}>
-                Kyiv hosts one of Eastern Europe's most advanced quantum infrastructure nodes,
+                Kyiv hosts one of Eastern Europe&apos;s most advanced quantum infrastructure nodes,
                 operating under EuroQCI partnership with direct fibre-optic quantum links to
                 Vienna, Warsaw, and Bucharest. The facility operates under EU technology-transfer
                 agreements, providing NATO-grade quantum key distribution to registered operators.
@@ -932,8 +936,8 @@ export default function ScanPage() {
                 {["EU-QNET #7", "EUROQCI", "NATO QKD", "ISO 27001", "GDPR COMPLIANT"].map(tag => (
                   <span key={tag} style={{
                     fontSize: 8, color: "var(--green)", letterSpacing: "0.1em",
-                    padding: "3px 7px", border: "1px solid rgba(0,255,65,0.2)",
-                    background: "rgba(0,255,65,0.04)",
+                    padding: "3px 7px", border: "1px solid rgba(212,160,32,0.2)",
+                    background: "rgba(212,160,32,0.04)",
                   }}>{tag}</span>
                 ))}
               </div>
@@ -942,8 +946,8 @@ export default function ScanPage() {
             {/* Reserve slot */}
             <div style={{
               padding: "22px 24px",
-              border: "1px solid rgba(0,255,65,0.35)",
-              background: "rgba(0,255,65,0.03)",
+              border: "1px solid rgba(212,160,32,0.35)",
+              background: "rgba(212,160,32,0.03)",
               display: "flex", flexDirection: "column", gap: 14,
               justifyContent: "center",
               animation: "fade-in-up 0.4s ease 0.63s both",
