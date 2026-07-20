@@ -10,7 +10,7 @@ interface Props {
   color?: string;
 }
 
-export default function LiveChart({ label, unit, min, max, color = "#00ff41" }: Props) {
+export default function LiveChart({ label, unit, min, max, color = "#d4a020" }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dataRef = useRef<number[]>([]);
   const rafRef = useRef<number>(0);
@@ -39,7 +39,7 @@ export default function LiveChart({ label, unit, min, max, color = "#00ff41" }: 
       ctx.clearRect(0, 0, W, H);
 
       // Grid lines
-      ctx.strokeStyle = "rgba(0,255,65,0.06)";
+      ctx.strokeStyle = "rgba(212,160,32,0.06)";
       ctx.lineWidth = 1;
       for (let i = 0; i <= 3; i++) {
         const y = (i / 3) * H;

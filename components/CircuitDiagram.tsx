@@ -52,11 +52,11 @@ export default function CircuitDiagram() {
         return (
           <g key={ri}>
             {/* Label */}
-            <text x={labelX - 2} y={y + 4} fontSize="7" fill="#4a6a4a"
+            <text x={labelX - 2} y={y + 4} fontSize="7" fill="#5a7a9a"
               textAnchor="end" fontFamily="Courier New">{label}</text>
             {/* Wire */}
             <line x1={wireStartX} y1={y} x2={W - 8} y2={y}
-              stroke="#00ff41" strokeWidth="0.5" opacity="0.3" />
+              stroke="#d4a020" strokeWidth="0.5" opacity="0.3" />
           </g>
         );
       })}
@@ -71,7 +71,7 @@ export default function CircuitDiagram() {
                 <line key={`ctrl-${ri}-${gi}`}
                   x1={x} y1={startY + (ri - 1) * rowH}
                   x2={x} y2={y}
-                  stroke="#00ff41" strokeWidth="0.5" opacity="0.4" />
+                  stroke="#d4a020" strokeWidth="0.5" opacity="0.4" />
               );
             }
             return null;
@@ -80,14 +80,14 @@ export default function CircuitDiagram() {
           if (sym === "•") {
             return (
               <circle key={`${ri}-${gi}`} cx={x} cy={y} r={4}
-                fill="#00ff41" opacity="0.5" className="gate-box" />
+                fill="#d4a020" opacity="0.5" className="gate-box" />
             );
           }
           return (
             <g key={`${ri}-${gi}`} className="gate-box">
               <rect x={x - 9} y={y - 7} width={18} height={14}
-                fill="rgba(0,18,8,0.9)" stroke="#00ff41" strokeWidth="0.8" opacity="0.5" rx="1" />
-              <text x={x} y={y + 4} fontSize="8" fill="#00ff41"
+                fill="rgba(8,12,20,0.9)" stroke="#d4a020" strokeWidth="0.8" opacity="0.5" rx="1" />
+              <text x={x} y={y + 4} fontSize="8" fill="#d4a020"
                 textAnchor="middle" fontFamily="Courier New">{sym}</text>
             </g>
           );

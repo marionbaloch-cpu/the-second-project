@@ -6,7 +6,7 @@ const HOTSPOTS = [
   {
     id: "flange",
     x: 50, y: 9,
-    color: "#b8ccd8",
+    color: "#e8e8e8",
     title: "Mounting Flange",
     subtitle: "20 mK Stage",
     body: "The stainless steel top plate suspends the entire dilution refrigerator assembly. All cabling and thermal links connect here before descending through successive temperature stages.",
@@ -15,7 +15,7 @@ const HOTSPOTS = [
   {
     id: "shields",
     x: 26, y: 30,
-    color: "#e8b030",
+    color: "#d4a020",
     title: "Thermal Radiation Shields",
     subtitle: "4K Stage",
     body: "Concentric gold-plated copper shields intercept infrared radiation. Each successive shield reduces the thermal load by orders of magnitude, enabling the base temperature to reach millikelvin range.",
@@ -24,7 +24,7 @@ const HOTSPOTS = [
   {
     id: "dilution",
     x: 73, y: 50,
-    color: "#d4a020",
+    color: "#f7a600",
     title: "Dilution Refrigerator Core",
     subtitle: "100 mK Stage",
     body: "A ³He/⁴He mixture undergoes quantum phase separation in the mixing chamber, absorbing heat as ³He atoms cross the phase boundary. This is the only continuous cooling mechanism below 300 mK.",
@@ -33,7 +33,7 @@ const HOTSPOTS = [
   {
     id: "processor",
     x: 50, y: 72,
-    color: "#4080ff",
+    color: "#00d4ff",
     title: "Superconducting Quantum Processor",
     subtitle: "15 mK Base Stage",
     body: "IBM Eagle 127-qubit transmon processor. Superconducting loops encode quantum states as microwave photons. At this temperature, thermal noise is 100× below the qubit energy — enabling coherence times above 100 µs.",
@@ -42,7 +42,7 @@ const HOTSPOTS = [
   {
     id: "cables",
     x: 27, y: 56,
-    color: "#00c832",
+    color: "#ffffff",
     title: "Superconducting Coax Lines",
     subtitle: "5–7 GHz Control",
     body: "Precision stainless-steel coaxial cables carry microwave control pulses. Attenuated 20 dB at each temperature stage to prevent thermal photons from reaching the qubits and causing decoherence.",
@@ -170,7 +170,7 @@ export default function MachineOverlay() {
           </div>
 
           <p style={{
-            fontSize: 10, color: "#5a8a5a", lineHeight: 1.65,
+            fontSize: 10, color: "#8aa8c8", lineHeight: 1.65,
             margin: "0 0 12px", letterSpacing: "0.03em",
           }}>
             {spot.body}
@@ -187,7 +187,7 @@ export default function MachineOverlay() {
           </div>
 
           <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 10 }}>
-            <div style={{ fontSize: 8, color: "#2a4a2a", letterSpacing: "0.1em" }}>
+            <div style={{ fontSize: 8, color: "#5a7a9a", letterSpacing: "0.1em" }}>
               ✕ CLOSE
             </div>
           </div>
